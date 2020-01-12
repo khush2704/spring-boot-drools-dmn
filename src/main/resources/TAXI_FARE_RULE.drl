@@ -1,0 +1,14 @@
+// https://github.com/eugenp/tutorials/blob/master/spring-drools/src/main/resources/TAXI_FARE_RULE.drl
+import org.chanwr.model.Fare;
+import org.chanwr.model.TaxiRide;
+
+global org.chanwr.model.Fare rideFare;
+dialect "mvel"
+
+rule "Calculate Taxi Fare - Scenario 1"
+    when
+        taxiRideInstance:TaxiRide(isNightSurcharge == false && distanceInMile < 10);
+    then
+        rideFare.setNightSurcharge(0L);
+        rideFare.setRideFare(70L);
+end
